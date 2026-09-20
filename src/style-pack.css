@@ -1,0 +1,148 @@
+/* StylePack — Classy (Life Coach Website)
+ *
+ * Warm beige (#F0F0EA) background, dark brown text. Primary is a warm near-black
+ * — solid black CTAs, cream negative space. The starter's red accent is
+ * suppressed per the cloudboard design decision (`neutral` primary): "solid
+ * black buttons, cream negative space" for a trust-first coaching site. Red is
+ * retained only for `destructive`.
+ * Lato for headings, Inter for body. 0px radius (sharp edges).
+ * Imported AFTER index.css — these values override the neutral defaults.
+ */
+
+:root {
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading-weight: 500;
+  --font-body-weight: 400;
+
+  /* Radius — 0px (sharp) */
+  --radius: 0px;
+
+  /* Colors */
+  --color-background: oklch(0.955 0.005 100);
+  --color-foreground: oklch(0.225 0.01 90);
+  --color-card: oklch(0.97 0.003 100);
+  --color-card-foreground: oklch(0.225 0.01 90);
+  --color-popover: oklch(0.97 0.003 100);
+  --color-popover-foreground: oklch(0.225 0.01 90);
+  --color-primary: oklch(0.225 0.01 90);
+  --color-primary-foreground: oklch(0.97 0.003 100);
+  --color-secondary: oklch(0.93 0.003 100);
+  --color-secondary-foreground: oklch(0.225 0.01 90);
+  --color-muted: oklch(0.93 0.003 100);
+  --color-muted-foreground: oklch(0.556 0 0);
+  --color-accent: oklch(0.93 0.003 100);
+  --color-accent-foreground: oklch(0.225 0.01 90);
+  --color-destructive: oklch(0.5 0.22 25);
+  --color-destructive-foreground: oklch(0.97 0 0);
+  --color-border: oklch(0.225 0.01 90 / 20%);
+  --color-input: oklch(0.225 0.01 90 / 20%);
+  --color-ring: oklch(0.225 0.01 90);
+  --color-sidebar: oklch(0.94 0.005 100);
+  --color-sidebar-foreground: oklch(0.225 0.01 90);
+  --color-sidebar-primary: oklch(0.225 0.01 90);
+  --color-sidebar-primary-foreground: oklch(0.97 0.003 100);
+  --color-sidebar-accent: oklch(0.93 0.003 100);
+  --color-sidebar-accent-foreground: oklch(0.225 0.01 90);
+  --color-sidebar-border: oklch(0.225 0.01 90 / 20%);
+  --color-sidebar-ring: oklch(0.225 0.01 90);
+}
+
+/* ── Public-site palette (warm terracotta / peach) ──────────────────────────
+ * `.theme-site` warms the base for all public pages: warm-ink text, burnt-
+ * terracotta CTAs, warm borders — on the existing beige ground. The section
+ * themes below locally override the same tokens, so any wrapped <section> that
+ * paints `bg-background text-foreground` becomes a tinted ground and its
+ * contents recolor automatically. Admin routes keep the neutral :root palette. */
+.theme-site {
+  --color-background: rgb(255 142 141);          /* coral base */
+  --color-foreground: rgb(33 5 5);               /* deep warm red text */
+  --color-primary: rgb(33 5 5);                  /* solid dark CTA */
+  --color-primary-foreground: rgb(255 255 255);
+  --color-secondary: rgb(255 255 255);           /* white secondary CTA */
+  --color-secondary-foreground: rgb(33 5 5);
+  --color-muted: rgb(255 176 175);
+  --color-muted-foreground: rgb(33 5 5 / 62%);
+  --color-accent: rgb(255 198 198);
+  --color-accent-foreground: rgb(33 5 5);
+  /* Form surfaces stay white regardless of section tint so inputs, selects,
+   * textareas, and popovers read as neutral. */
+  --color-card: rgb(255 255 255);
+  --color-card-foreground: rgb(33 5 5);
+  --color-popover: rgb(255 255 255);
+  --color-popover-foreground: rgb(33 5 5);
+  --color-border: rgb(33 5 5 / 18%);
+  --color-input: rgb(33 5 5 / 18%);
+  --color-ring: rgb(33 5 5);
+}
+
+/* Form fields render on white regardless of the section tint. Scoped to
+ * `.theme-site` so admin routes keep the neutral :root defaults. */
+.theme-site :is(input, textarea, select),
+.theme-site [data-slot="select-trigger"],
+.theme-site [role="combobox"] {
+  background-color: rgb(255 255 255);
+  color: rgb(33 5 5);
+}
+
+.theme-peach {
+  --color-background: rgb(251 230 191);
+  --color-foreground: rgb(29 18 9);
+  --color-primary: rgb(29 18 9);
+  --color-primary-foreground: rgb(251 230 191);
+  --color-border: rgb(29 18 9 / 18%);
+  --color-muted-foreground: rgb(29 18 9 / 60%);
+  --color-ring: rgb(29 18 9);
+}
+
+.theme-coral {
+  --color-background: rgb(255 142 141);
+  --color-foreground: rgb(33 5 5);
+  --color-primary: rgb(33 5 5);
+  --color-primary-foreground: rgb(255 142 141);
+  --color-border: rgb(33 5 5 / 22%);
+  --color-muted-foreground: rgb(33 5 5 / 62%);
+  --color-ring: rgb(33 5 5);
+}
+
+.theme-ink {
+  --color-background: rgb(29 18 9);
+  --color-foreground: rgb(240 231 218);
+  --color-primary: rgb(248 116 38);
+  --color-primary-foreground: rgb(29 18 9);
+  --color-border: rgb(240 231 218 / 18%);
+  --color-muted-foreground: rgb(240 231 218 / 62%);
+  --color-ring: rgb(248 116 38);
+}
+
+/* Same-hue tints to alternate section grounds against the coral base.
+ * Nested inside `.theme-site`, so they inherit its dark text/CTA and only
+ * swap the background lightness/saturation. */
+.theme-blush {
+  --color-background: rgb(255 198 198);
+}
+.theme-coral-deep {
+  --color-background: rgb(255 122 120);
+}
+
+body {
+  font-feature-settings: "cv11";
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--font-body-weight);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-heading-weight);
+  /* Fraunces is a variable serif — let the browser pick the optical cut per
+     size (display at large sizes, text at small) and lightly tighten. */
+  font-optical-sizing: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
